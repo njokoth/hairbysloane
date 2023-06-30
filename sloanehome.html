@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card:hover {
+      height: auto;
+    }
+
+    .card:hover .card-text {
+      display: block;
+    }
+
+    .card-text {
+      display: none;
+    }
+
+    .btn-primary {
+  background-color: #d2879f; /* Replace with your desired color value */
+  border-color: #d2879f; /* Replace with your desired color value */
+}
+
+  /* Custom Button Hover Color */
+  .custom-btn:hover {
+    background-color: #6c3043;
+    border-color: #6c3043;
+  }
+
+  .custom-btn.custom-btn:onclick {
+    background: gray;
+  }
+
+  .hidden {
+      display: none;
+    }
+
+    .swipe-animation {
+      animation-name: swipeOut;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes swipeOut {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #d2879f;">
+    <div class="container">
+      <a class="navbar-brand" href="#">Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="revealAdditionalCard('myAvailability')">My Availability</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="revealAdditionalCard('appointments')">Appointments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Clients</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="signOut()">Sign Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    function signOut() {
+      // Apply swipe-out animation to elements one by one
+      var elements = document.querySelectorAll('.navbar, .container');
+      for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        element.classList.add('swipe-animation');
+      }
+
+      // Redirect to sloanelogin.html after a delay
+      setTimeout(function() {
+        window.location.href = 'sloanelogin.html';
+      }, 1000); // Change the delay time (in milliseconds) as needed
+    }
+
+    function revealAdditionalCard(cardId) {
+      // Add your code to reveal the additional card here
+    }
+  </script>
+
+
+<!-- Dashboard Content -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">My Availability</h5>
+          <p class="card-text">Edit your availability here. Changes will immediately be reflected in the booking section of the website.</p>
+          <a href="#" class="btn btn-primary custom-btn" onclick="revealAdditionalCard('myAvailability')">View Availability</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Appointments</h5>
+          <p class="card-text">Create new appointments or change existing ones here.</p>
+          <a href="#" class="btn btn-primary custom-btn" onclick="revealAdditionalCard('appointments')">View Appointments</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Clients</h5>
+          <p class="card-text">Reach out to clients via their saved contacts, or message them directly here.</p>
+          <button class="btn btn-primary custom-btn" onclick="revealClientsCard()">View Client List</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Additional Card with Clients Contact Information -->
+  <div class="additional-card mt-4 d-none" id="clientsCard">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Clients</h5>
+              <p class="card-text">This is an additional card that is revealed when clicking the "Go to Clients" button.</p>
+              <ul class="list-group">
+                <!-- Client Contact Information -->
+                <li class="list-group-item">
+                  <span class="client-name">Alice Smith</span> -
+                  <a href="tel:+15551234567" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:alice.smith@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: Yes</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Emily Johnson</span> -
+                  <a href="tel:+15557654321" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:emily.johnson@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: No</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Sophia Williams</span> -
+                  <a href="tel:+15559998888" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:sophia.williams@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: Yes</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Olivia Brown</span> -
+                  <a href="tel:+15552345678" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:olivia.brown@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: No</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Ava Taylor</span> -
+                  <a href="tel:+15557654321" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:ava.taylor@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: Yes</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Isabella Anderson</span> -
+                  <a href="tel:+15552345678" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:isabella.anderson@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: No</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Mia Martinez</span> -
+                  <a href="tel:+15559998888" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:mia.martinez@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: Yes</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Charlotte Davis</span> -
+                  <a href="tel:+15551234567" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:charlotte.davis@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: No</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Harper Wilson</span> -
+                  <a href="tel:+15557654321" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:harper.wilson@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: Yes</span>
+                </li>
+                <li class="list-group-item">
+                  <span class="client-name">Amelia Thompson</span> -
+                  <a href="tel:+15551234567" class="btn btn-primary btn-sm">Call</a> |
+                  <a href="mailto:amelia.thompson@example.com" class="btn btn-primary btn-sm">Email</a> -
+                  <span class="client-details">VIP: No</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<script>
+
+function revealClientsCard() {
+    var clientsCard = document.getElementById("clientsCard");
+    clientsCard.classList.remove("d-none");
+  }
+  </script>
+
+<!-- Additional Card with Appointments List -->
+<div class="additional-card mt-4 d-none" id="appointmentsCard">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Appointments</h5>
+            <p class="card-text">This is an additional card that is revealed when clicking the "Go to Appointments" button.</p>
+            <ul class="list-group">
+              <!-- Your Appointments List -->
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> June 28, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 9:00 AM - 10:00 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Emily Johnson
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> June 29, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 10:30 AM - 11:30 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Olivia Smith
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> June 30, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 1:00 PM - 2:00 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Ava Johnson
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 1, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 3:30 PM - 4:30 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Isabella Davis
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 2, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 9:00 AM - 10:00 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Mia Wilson
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 3, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 10:30 AM - 11:30 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Sophia Martinez
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 4, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 1:00 PM - 2:00 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Charlotte Anderson
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 5, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 3:30 PM - 4:30 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Harper Thompson
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 6, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 9:00 AM - 10:00 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Evelyn Baker
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 7, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 10:30 AM - 11:30 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Amelia Lewis
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 8, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 1:00 PM - 2:00 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Abigail Turner
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 9, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 3:30 PM - 4:30 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Emily Parker
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 10, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 9:00 AM - 10:00 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Olivia Hill
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 11, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 10:30 AM - 11:30 AM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Ava Cooper
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 12, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 1:00 PM - 2:00 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Isabella Murphy
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-md-3">
+                    <strong>Date:</strong> July 13, 2023
+                  </div>
+                  <div class="col-md-3">
+                    <strong>Time:</strong> 3:30 PM - 4:30 PM
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Client:</strong> Mia Garcia
+                    <span class="badge bg-danger float-end">NEW</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const appointmentItems = document.querySelectorAll('.list-group-item');
+  appointmentItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      const badge = this.querySelector('.badge');
+      if (badge) {
+        badge.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+<!-- Additional Card with Availability Form -->
+<div class="additional-card mt-4 d-none" id="myAvailabilityCard">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">My Availability</h5>
+            <p class="card-text">This is an additional card that is revealed when clicking the "Go to My Availability" button.</p>
+            <form id="availabilityForm">
+              <!-- Your Availability Form -->
+              <div class="mb-3">
+                <label for="availability" class="form-label">Availability</label>
+                <select class="form-select" id="availability" required>
+                  <option selected disabled>Select your availability</option>
+                  <option value="2023-06-28">June 28, 2023</option>
+                  <option value="2023-06-29">June 29, 2023</option>
+                  <option value="2023-06-30">June 30, 2023</option>
+                  <option value="2023-07-01">July 1, 2023</option>
+                  <option value="2023-07-02">July 2, 2023</option>
+                  <option value="2023-07-03">July 3, 2023</option>
+                  <option value="2023-07-04">July 4, 2023</option>
+                  <option value="2023-07-05">July 5, 2023</option>
+                  <option value="2023-07-06">July 6, 2023</option>
+                  <option value="2023-07-07">July 7, 2023</option>
+                  <option value="2023-07-08">July 8, 2023</option>
+                  <option value="2023-07-09">July 9, 2023</option>
+                  <option value="2023-07-10">July 10, 2023</option>
+                  <option value="2023-07-11">July 11, 2023</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="timeRange" class="form-label">Time Range</label>
+                <input type="text" id="timeRange" name="timeRange" required>
+                <small class="form-text text-muted">Specify your availability in the format "start-end". Example: 10AM-6PM</small>
+              </div>
+              <button type="submit" id="saveButton" class="btn btn-primary">Save Changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+  <script>
+    // Function to handle the save button click event
+    function handleSaveButtonClick() {
+      // Show loading animation
+      showLoadingAnimation();
+  
+      // Simulate an asynchronous operation (e.g., saving data)
+      setTimeout(function() {
+        // Hide loading animation
+        hideLoadingAnimation();
+  
+        // Display success message
+        showSuccessMessage();
+  
+        // Disable form and save button
+        disableFormAndButton();
+      }, 2000); // Adjust the delay (in milliseconds) to match your needs
+    }
+  
+    // Function to show the loading animation
+    function showLoadingAnimation() {
+      // Create and add the loading animation element
+      var loadingElement = document.createElement("div");
+      loadingElement.classList.add("loading");
+      document.body.appendChild(loadingElement);
+    }
+  
+    // Function to hide the loading animation
+    function hideLoadingAnimation() {
+      // Remove the loading animation element
+      var loadingElement = document.querySelector(".loading");
+      loadingElement.parentNode.removeChild(loadingElement);
+    }
+  
+    // Function to show the success message with fade-in and fade-out effects
+  function showSuccessMessage() {
+    // Create and add the success message element
+    var messageElement = document.createElement("div");
+    messageElement.classList.add("success-message");
+    messageElement.innerText = "Changes Saved.";
+    messageElement.style.opacity = "0"; // Set initial opacity to 0
+    document.body.appendChild(messageElement);
+
+    // Trigger the fade-in effect
+    setTimeout(function() {
+      messageElement.style.opacity = "1"; // Fade in by setting opacity to 1
+      messageElement.style.transition = "opacity 0.5s"; // Apply transition effect
+    }, 10); // Delay the fade-in effect by a few milliseconds
+
+    // Hide the success message after 2 seconds with fade-out effect
+    setTimeout(function() {
+      messageElement.style.opacity = "0"; // Fade out by setting opacity to 0
+
+      setTimeout(function() {
+        messageElement.style.display = "none"; // Hide the message after fade-out
+      }, 500); // Adjust the duration of the fade-out transition
+    }, 2000);
+  }
+  
+    // Function to disable the form and save button
+    function disableFormAndButton() {
+      // Disable the form fields
+      var formFields = document.querySelectorAll("#availabilityForm input, #availabilityForm select, #availabilityForm button");
+      formFields.forEach(function(field) {
+        field.disabled = true;
+      });
+  
+      // Disable the save button
+      var saveButton = document.getElementById("saveButton");
+      saveButton.disabled = true;
+    }
+  
+    // Add click event listener to the save button
+    var saveButton = document.getElementById("saveButton");
+    saveButton.addEventListener("click", handleSaveButtonClick);
+  </script>
+  
+  <style>
+    /* CSS for loading animation */
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 8px;
+    }
+  
+    .loading::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: calc(50% - 20px);
+      left: calc(50% - 20px);
+      width: 40px;
+      height: 40px;
+      border: 3px solid #ddd;
+      border-radius: 50%;
+      border-top-color: #888;
+      animation: spin 1s ease-in-out infinite;
+    }
+  
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  
+    /* CSS for success message */
+    .success-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+  </style>
+  
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function revealAdditionalCard(cardId) {
+      var additionalCard = document.getElementById(cardId + 'Card');
+      additionalCard.classList.toggle('d-none');
+    }
+    function revealAdditionalCard(cardId) {
+  var card = document.getElementById(cardId + "Card");
+  card.classList.remove("d-none");
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('availabilityForm');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Retrieve the form data
+    const availability = document.getElementById('availability').value;
+    const timeRange = document.getElementById('timeRange').value;
+
+    // Create a data object to send in the request body
+    const data = {
+      availability,
+      timeRange,
+    };
+
+    // Send a POST request to the server
+    fetch('http://localhost:3000/saveAvailability', { // Update the URL
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Availability saved successfully.');
+          // Display a success message or perform any other necessary actions
+        } else {
+          console.error('Error saving availability.');
+          // Display an error message or handle the error appropriately
+        }
+      })
+      .catch((error) => {
+        console.error('Error saving availability:', error);
+        // Display an error message or handle the error appropriately
+      });
+  });
+});
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

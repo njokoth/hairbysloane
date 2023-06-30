@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons&display=block" rel="stylesheet">
+  <style>
+    body {
+      background-color: #d2879f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      animation: formAnimation 1s ease;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fieldAnimation 1s ease forwards;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .text-center button[type="submit"] {
+      opacity: 0;
+      animation: buttonAnimation 1s ease forwards;
+    }
+
+    .loading-animation {
+      text-align: center;
+    }
+
+    .loading-animation span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #333;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: loading 1s infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes formAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fieldAnimation {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes buttonAnimation {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .shuffling-spans {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      opacity: 0.8;
+      animation: shuffle 5s infinite;
+      color: #999;
+    }
+
+    .shuffling-spans span {
+      display: none;
+      margin: 0 5px;
+    }
+
+    .shuffling-spans span.show {
+      display: inline-block;
+    }
+
+    @keyframes shuffle {
+      0%, 33.33% {
+        opacity: 0;
+      }
+      33.33%, 66.66% {
+        opacity: 1;
+      }
+      66.66%, 100% {
+        opacity: 0;
+      }
+    }
+
+    .btn-primary{
+      background-color:#d2879f;
+      border-color: #d2879f;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+    }
+
+    .material-symbols-outlined::before {
+      content: attr(data-icon);
+    }
+    .material-symbols-outlined {
+      /* Add the following styles */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 10px; /* Adjust the margin as needed */
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+   
+    .locked-out-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+}
+
+.locked-out-message span {
+  display: block;
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.locked-out-message div {
+  margin-bottom: 20px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6" id="formCard">
+        <div class="login-form">
+          <div class="shuffling-spans">
+            <span class="material-icons show">store</span>
+            <span class="material-icons">perm_contact_calendar</span>
+            <span class="material-icons">currency_exchange</span>
+          </div>
+          <h2 class="text-center">Welcome, <em>Sloane!</em></h2>
+          <form id="loginForm">
+            <div class="mb-3 form-group">
+              <span class="material-symbols-outlined" data-icon="badge"></span>
+              <input type="text" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3 form-group">
+              <span class="material-symbols-outlined" data-icon="password"></span>
+              <input type="password" id="password" class="form-control" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+          <div id="loadingAnimation" class="loading-animation"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="lockedOutMessage" class="locked-out-message d-none">
+    <span class="material-icons">crisis_alert</span>
+    <div>
+      <p>Your IP has been locked out of this site for the next 3 hours.</p>
+      <p>Please try again later or <a class="contact-support" href="#">contact support</a>.</p>
+    </div>
+  </div>
+  
+
+  <!-- Custom Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title" id="errorModalLabel">Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="errorMessage"></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-link text-muted" style="opacity: 0.5;">Contact Support</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+          <button type="button" class="btn btn-primary" id="resetPasswordButton">Reset Password</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      var usernameInput = document.getElementById('username').value;
+      var passwordInput = document.getElementById('password').value;
+
+      // Send a POST request to the server for authentication
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/login', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            // Authentication successful
+            // Redirect the user to sloanehome.html
+            window.location.href = 'sloanehome.html';
+          } else {
+            // Authentication failed
+            console.error('Authentication failed:', xhr.responseText);
+            alert('Invalid username or password. Please try again.');
+          }
+        }
+      };
+
+      // Send the request with the entered username and password as JSON payload
+      xhr.send(JSON.stringify({ username: usernameInput, password: passwordInput }));
+    });
+  });
+</script>
+
+
+</body>
+</html>
